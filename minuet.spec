@@ -38,7 +38,7 @@ experienced musicians.
 
 %package devel
 Summary:        Minuet: Build Environment
-Requires:       %{name}%{?_isa} = %{version}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development headers and libraries for Minuet.
