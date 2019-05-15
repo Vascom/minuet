@@ -1,11 +1,14 @@
 Name:           minuet
 Version:        19.04.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A KDE Software for Music Education
-License:        GPLv2+
+#OFL license for bundled Bravura.otf font
+#and BSD license for cmake/FindFluidSynth.cmake
+License:        GPLv2+ and OFL
 URL:            http://www.kde.org
 Source:         https://download.kde.org/stable/applications/%{version}/src/%{name}-%{version}.tar.xz
 
+BuildRequires:  gcc-c++
 BuildRequires:  extra-cmake-modules >= 5.15.0
 BuildRequires:  kf5-filesystem
 BuildRequires:  desktop-file-utils
@@ -24,6 +27,9 @@ BuildRequires:  libappstream-glib
 # Runtime requirement
 Requires:       qt5-qtquickcontrols2
 Requires:       hicolor-icon-theme
+Requires:       %{name}-data
+
+Provides:       bundled(font(bravura))
 
 %description
 Application for Music Education.
@@ -42,6 +48,14 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development headers and libraries for Minuet.
+
+%package data
+Summary:        Minuet: Data files
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+BuildArch:      noarch
+
+%description data
+Data files for Minuet.
 
 %prep
 %autosetup
@@ -82,7 +96,15 @@ appstream-util validate-relax --nonet %{buildroot}%{_kf5_metainfodir}/org.kde.%{
 %{_includedir}/%{name}
 %{_kf5_libdir}/libminuetinterfaces.so
 
+%files data
+%{_kf5_datadir}/%{name}
+
 
 %changelog
-* Mon May 13 2019 Vasiliy N. Glazov <vascom2@gmail.com> - 19.04.0-1
+* Wed May 15 2019 Vasiliy N. Glazov <vascom2@gmail.com> - 19.04.1-2
+- Added gcc-c++ to BR
+- Data in separate subpackage
+- Correct licensing
+
+* Mon May 13 2019 Vasiliy N. Glazov <vascom2@gmail.com> - 19.04.1-1
 - First release for fedora
