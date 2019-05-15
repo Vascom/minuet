@@ -86,7 +86,6 @@ appstream-util validate-relax --nonet %{buildroot}%{_kf5_metainfodir}/org.kde.%{
 %{_kf5_metainfodir}/org.kde.%name.appdata.xml
 %{_kf5_bindir}/%{name}
 %{_kf5_datadir}/icons/hicolor/*/*/*
-%{_kf5_datadir}/%{name}
 %{_kf5_libdir}/libminuetinterfaces.so.*
 %{_qt5_plugindir}/%{name}
 
